@@ -1,11 +1,13 @@
 import streamlit as st
 import pandas as pd
 import pickle
+import joblib
 
 # Load the model
-with open('lgbm_energy_prediction1.pkl', 'rb') as file:
-    lgbm_model = pickle.load(file)
-
+#with open('lgbm_energy_prediction1.pkl', 'rb') as file:
+    #lgbm_model = pickle.load(file)
+# Load the model back
+lgbm_model = joblib.load('lgbm_energy_prediction2.pkl')
 # Function to make predictions
 def make_prediction(input_data):
     # Preprocess input data if necessary
