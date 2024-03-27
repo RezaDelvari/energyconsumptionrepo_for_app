@@ -1,19 +1,23 @@
 import streamlit as st
 import pandas as pd
-import pickle
 import joblib
 
 # Load the model
-#with open('lgbm_energy_prediction1.pkl', 'rb') as file:
-    #lgbm_model = pickle.load(file)
-# Load the model back
-lgbm_model = joblib.load('lgbm_energy_prediction2.pkl')
+try:
+    lgbm_model = joblib.load('lgbm_energy_prediction2.pkl')
+except FileNotFoundError:
+    st.error("Model file not found. Please make sure the model file is in the correct location.")
+except Exception as e:
+    st.error(f"Error loading the model: {e}")
+
 # Function to make predictions
 def make_prediction(input_data):
-    # Preprocess input data if necessary
-    # Make prediction using the loaded model
-    prediction = lgbm_model.predict(input_data)
-    return prediction
+    try:
+        prediction = lgbm_model.predict(input_data)
+        return prediction
+    except Exception as e:
+        st.error(f"Error making prediction: {e}")
+
 # Streamlit app
 def main():
     # Custom CSS styling to adjust the main content area
@@ -68,15 +72,11 @@ def main():
     if st.button('Predict'):
         input_data = [[is_business, is_consumption, year, month, day, hour, installed_capacity, total_precipitation_mean_f, cloudcover_low_min_f, direct_solar_radiation_mean_f]]
         prediction = make_prediction(input_data)
-        if is_consumption:
-            st.write('Predicted energy consumption:', f'{prediction[0]:,.2f} kWh')  # Display result with kWh unit
-        else:
-            st.write('Predicted energy production:', f'{prediction[0]:,.2f} kWh')  # Display result with kWh unit
+        if prediction:
+            if is_consumption:
+                st.write('Predicted energy consumption:', f'{prediction[0]:,.2f} kWh')  # Display result with kWh unit
+            else:
+                st.write('Predicted energy production:', f'{prediction[0]:,.2f} kWh')  # Display result with kWh unit
 
 if __name__ == '__main__':
     main()
-
-
-
-
-
