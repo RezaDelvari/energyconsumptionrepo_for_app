@@ -1,14 +1,16 @@
 import streamlit as st
 import pandas as pd
-import joblib
+import pickle
 
 # Load the model
-try:
-    lgbm_model = joblib.load('lgbm_energy_prediction2.pkl')
-except FileNotFoundError:
-    st.error("Model file not found. Please make sure the model file is in the correct location.")
-except Exception as e:
-    st.error(f"Error loading the model: {e}")
+# try:
+#     lgbm_model = joblib.load('lgbm_energy_prediction2.pkl')
+# except FileNotFoundError:
+#     st.error("Model file not found. Please make sure the model file is in the correct location.")
+# except Exception as e:
+#     st.error(f"Error loading the model: {e}")
+with open('lgbm_energy_prediction3.pkl','rb') as file:
+    lgbm_model = pickle.load(file)
 
 # Function to make predictions
 def make_prediction(input_data):
