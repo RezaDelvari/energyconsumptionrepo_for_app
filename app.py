@@ -9,9 +9,9 @@ import pickle
 #     st.error("Model file not found. Please make sure the model file is in the correct location.")
 # except Exception as e:
 #     st.error(f"Error loading the model: {e}")
-with open('lgbm_energy_prediction3.pkl','rb') as file:
-    lgbm_model = pickle.load(file)
-
+# with open('lgbm_energy_prediction3.pkl','rb') as file:
+#     lgbm_model = pickle.load(file)
+lgbm_model = pickle.load(open('lgbm_energy_prediction3.pkl','rb'))
 # Function to make predictions
 def make_prediction(input_data):
     try:
@@ -34,9 +34,9 @@ def main():
         unsafe_allow_html=True
     )
 
-    # LinkedIn barcode image in the sidebar
-    st.sidebar.title('LinkedIn Barcode')
-    st.sidebar.image('1.jpg', use_column_width=False, output_format='JPEG', width=300)
+    # # LinkedIn barcode image in the sidebar
+    # st.sidebar.title('LinkedIn Barcode')
+    # st.sidebar.image('1.jpg', use_column_width=False, output_format='JPEG', width=300)
 
     # Add "Created by Reza" with a hyperlink to your GitHub page at the bottom of the sidebar
     st.sidebar.markdown(
