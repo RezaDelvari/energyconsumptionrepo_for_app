@@ -74,7 +74,7 @@ def main():
 
 if __name__ == '__main__':
     main()
-lgbm_model = pickle.load(open('lgbm_energy_prediction3.pkl','rb'))
+lgbm_model = pickle.load(open('lgbm_energy_prediction4.pkl','rb'))
 # Function to make predictions
 def make_prediction(input_data):
     try:
