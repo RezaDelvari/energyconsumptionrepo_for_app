@@ -11,11 +11,13 @@ import pickle
 #     st.error(f"Error loading the model: {e}")
 # with open('lgbm_energy_prediction3.pkl','rb') as file:
 #     lgbm_model = pickle.load(file)
-lgbm_model = pickle.load(open('lgbm_energy_prediction4.pkl', 'rb'))
+# lgbm = pickle.load(open('lgbm_energy_prediction4.pkl', 'rb'))
+with open('lgbm_energy_prediction4.pkl', 'rb') as pickle_in:
+    lgbm = pickle.load(pickle_in)
 # Function to make predictions
 def make_prediction(input_data):
     try:
-        prediction = lgbm_model.predict(input_data)
+        prediction = lgbm.predict(input_data)
         return prediction
     except Exception as e:
         st.error(f"Error making prediction: {e}")
