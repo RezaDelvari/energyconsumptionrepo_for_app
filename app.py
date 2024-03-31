@@ -11,6 +11,14 @@ import pickle
 #     st.error(f"Error loading the model: {e}")
 # with open('lgbm_energy_prediction3.pkl','rb') as file:
 #     lgbm_model = pickle.load(file)
+lgbm_model = pickle.load(open('lgbm_energy_prediction4.pkl', 'rb'))
+# Function to make predictions
+def make_prediction(input_data):
+    try:
+        prediction = lgbm_model.predict(input_data)
+        return prediction
+    except Exception as e:
+        st.error(f"Error making prediction: {e}")
 
 # Streamlit app
 def main():
@@ -26,11 +34,11 @@ def main():
         unsafe_allow_html=True
     )
 
-    # # LinkedIn barcode image in the sidebar
-    # st.sidebar.title('LinkedIn Barcode')
-    # st.sidebar.image('1.jpg', use_column_width=False, output_format='JPEG', width=300)
+    # LinkedIn barcode image in the sidebar
+    st.sidebar.title('LinkedIn Barcode')
+    st.sidebar.image('1.jpg', use_column_width=False, output_format='JPEG', width=300)
 
-    # Add "Created by Reza" with a hyperlink to your GitHub page at the bottom of the sidebar
+    #Add "Created by Reza" with a hyperlink to your GitHub page at the bottom of the sidebar
     st.sidebar.markdown(
         """  
         ---
@@ -74,11 +82,4 @@ def main():
 
 if __name__ == '__main__':
     main()
-lgbm_model = pickle.load(open('lgbm_energy_prediction4.pkl','rb'))
-# Function to make predictions
-def make_prediction(input_data):
-    try:
-        prediction = lgbm_model.predict(input_data)
-        return prediction
-    except Exception as e:
-        st.error(f"Error making prediction: {e}")
+
